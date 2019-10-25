@@ -12,10 +12,17 @@ def get_title(url):
     except Exception as e:
         code = "< {} >".format(str(e))
         title = "< none >"
-    return title.strip(), code
+    title = title.strip()
+
+    # A rough way to deal with non-utf-8 titles
+    try:
+        title = title.encode(encoding="ISO-8859-1").decode()
+    except:
+        pass
+    return title, code
 
 
-def get_title_with_scheme(url):
+def get_title_noscheme(url):
     scheme = ['http://', 'https://']
     if url.find(scheme[0]) == 0 or url.find(scheme[1]) == 0:
         scheme = [""]
@@ -53,7 +60,7 @@ if __name__ == '__main__':
         res_writer.writerow(["url", "url_title", "url_code"])
         counter = 0
         for url in input:
-            title, code = get_title_with_scheme(url)
+            title, code = get_title_noscheme(url)
             counter += 1
             print("{:2} |  {:3} {}".format(str(counter), str(code), url))
             res_writer.writerow([code, url, title])
