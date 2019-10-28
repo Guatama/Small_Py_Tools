@@ -31,23 +31,23 @@ def get_title(url, url_scheme=None):
     return title, code
 
 
-def get_title_noscheme(url):
-    scheme = ['http://', 'https://']
-    if url.find(scheme[0]) == 0 or url.find(scheme[1]) == 0:
-        scheme = [""]
 
-    for i in scheme:
-        url_with_scheme = i + url
+def get_title_noscheme(url):
+    schemes = ['http://', 'https://']
+    if url.find(schemes[0]) == 0 or url.find(schemes[1]) == 0:
+        schemes = ['']
+
+    for scheme in schemes:
         try:
-            title, code = get_title(url_with_scheme)
+            title, code = get_title(url, scheme)
             if len(scheme) > 1:
-                code = str(code) + " (scheme add: " + i + ")"
+                code = str(code) + " (scheme add: " + scheme + ")"
             else:
                 code = str(code)
             break
         except Exception as e:
             if len(scheme) > 1:
-                code = "< url unavailable > (scheme add: " + i + ") "
+                code = "< url unavailable > (scheme add: " + scheme + ") "
             else:
                 code = "< url unavailable > "
             title = "< none >"
