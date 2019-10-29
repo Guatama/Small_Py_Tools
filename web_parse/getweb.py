@@ -31,7 +31,6 @@ def get_title(url, url_scheme=None):
     return title, code
 
 
-
 def get_title_noscheme(url):
     schemes = ['http://', 'https://']
     if url.find(schemes[0]) == 0 or url.find(schemes[1]) == 0:
