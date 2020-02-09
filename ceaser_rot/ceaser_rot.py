@@ -53,7 +53,7 @@ def main():
     group.add_argument('-e', '--encrypt', action='store_true')
     group.add_argument('-d', '--decrypt', action='store_true', default=False)
     parser.add_argument('text', nargs='*')
-    parser.add_argument('-k', '--key', type=int, default=1)
+    parser.add_argument('-k', '--key', type=int, default=13)
     args = parser.parse_args()
 
     text_string = ' '.join(args.text)
