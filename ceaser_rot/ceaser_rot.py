@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 import argparse
 
+
 def rot_encrypt(plain_text, key=13):
     """
     Unicode codes in Python 3
-    unicode_range = { 
-                    'a': [97, 122],
-                    'A': [65, 90],
-                    'а': [1072, 1103],
+    unicode_range = {
+                    Latin alphabet
+                    'a': [97, 122]
+                    'A': [65, 90]
+
+                    Cyrillic alphabet
+                    'а': [1072, 1103]
                     'А': [1040, 1071]
                     }
     """
+    if not isinstance(plain_text, str):
+        raise TypeError('Input argument is not a string')
     result = ''
 
     for char in plain_text:
@@ -20,7 +26,7 @@ def rot_encrypt(plain_text, key=13):
             if ord(char) >= 1040 and ord(char) <= 1103:
                 alphabet = [32, [1040, 1071], [1072, 1103]]
 
-            number = ord(char) + key
+            number = ord(char) + (key % alphabet[0])
 
             if char.isupper():
                 if number > alphabet[1][1]:
@@ -34,18 +40,18 @@ def rot_encrypt(plain_text, key=13):
                     number += alphabet[0]
 
             result += chr(number)
-        
+
         else:
             result += char
 
-    return  result
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-e', '--encrypt', action='store_true')
-    group.add_argument('-d', '--decrypt', action='store_true')
+    group.add_argument('-d', '--decrypt', action='store_true', default=False)
     parser.add_argument('text', nargs='*')
     parser.add_argument('-k', '--key', type=int, default=1)
     args = parser.parse_args()
@@ -56,6 +62,7 @@ def main():
         key = -key
     cyphertext = rot_encrypt(text_string, key)
     print(cyphertext)
+
 
 if __name__ == "__main__":
     main()
