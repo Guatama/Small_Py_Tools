@@ -1,7 +1,8 @@
 #! python
 import datetime
 import meduza
-import platform, os
+import platform
+import os
 from time import sleep
 import requests
 from bs4 import BeautifulSoup
@@ -64,7 +65,7 @@ def teletype(min=5, city=''):
 
         print(get_weather(city))
         print(header)
-        print('-- Meduza.News ','-' * len(header))
+        print('-- Meduza.News ', '-' * len(header))
         num += 1
         meduza_news = get_meduza_news()
         print_news(meduza_news)
