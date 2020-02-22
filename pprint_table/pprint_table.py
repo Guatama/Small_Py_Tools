@@ -37,7 +37,7 @@ def pprint_table(list_with_data: tp.List[tp.Dict[str, str]],
     attr_list: tp.List[str] = list(list_with_data[0].keys())
     attr_config: tp.Dict[str, bool] = dict.fromkeys(attr_list, False)
 
-    main_attr = attr_list if main_attr is None else main_attr
+    main_attr = attr_list if main_attr is None or full else main_attr
     header = attr_list if header is None else header
     header_config: tp.Dict[str, str] = {
         attr_key: header_name for (attr_key, header_name)
