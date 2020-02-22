@@ -63,11 +63,11 @@ def pprint_table(list_with_data: tp.List[tp.Dict[str, str]],
                 len_dict[item] = len(line[item])
 
     # Print header table with delimiter =
-    for item in attr_list:
+    for item in main_attr:
         if attr_config[item] or full:
             print(f'{header_config[item]:{len_dict[item]}} : ', end='')
     print()
-    for item in attr_list:
+    for item in main_attr:
         if attr_config[item] or full:
             print(f'{"=":=<{len_dict[item]}} : ', end='')
     print()
@@ -82,7 +82,7 @@ def pprint_table(list_with_data: tp.List[tp.Dict[str, str]],
             line_counter += 1
 
         # Print table row
-        for item in attr_list:
+        for item in main_attr:
             if attr_config[item] or full:
                 print(f'{line[item]:{len_dict[item]}} : ', end='')
         print()
