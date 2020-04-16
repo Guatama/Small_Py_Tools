@@ -19,7 +19,7 @@ def rot_encrypt(plain_text: str, key: int = 13) -> str:
     Returns:
         str -- [encrypted message]
     """
-    table = plain_text.maketrans(ascii_letters, shift_ascii(key))
+    table = plain_text.maketrans(ascii_letters, shift_ascii(key % 26))
     return plain_text.translate(table)
 
 
